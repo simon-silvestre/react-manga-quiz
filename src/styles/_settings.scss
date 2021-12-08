@@ -1,0 +1,19 @@
+$poppins: Poppins ,sans-serif;
+$color-1: #5CCDE5;
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $poppins;
+}
+
+body {
+    background-color: #F2F3FB;
+}
+
+p, span {
+    color: #6A6E6F;
+    font-size: 18px;
+}
+
