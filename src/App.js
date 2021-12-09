@@ -6,35 +6,48 @@ function App() {
   const [questions] = useState([
     {
       question: 'Qui a remplacé Sasuke dans l\'équipe 7 ?',
-      reponse1: 'Yamato',
-      reponse2: 'Saï',
-      reponse3: 'Kiba'
+      A: 'Yamato',
+      B: 'Saï',
+      C: 'Kiba'
     },
     {
       question: 'Comment s\'appelle la grand mère de Sasori ?',
-      reponse1: 'Amané',
-      reponse2: 'Tsunade',
-      reponse3: 'Chiyo'
+      A: 'Amané',
+      B: 'Tsunade',
+      C: 'Chiyo'
     },
     {
       question: 'Quel animal peut invoquer Naruto ?',
-      reponse1: 'Des grenouilles',
-      reponse2: 'Des serpents',
-      reponse3: 'Des aigles'
+      A: 'Des grenouilles',
+      B: 'Des serpents',
+      C: 'Des aigles'
     }
   ])
+
+  const [reponses] = useState(['B', 'C', 'A'])
 
   const [index, setIndex] = useState(0)
 
   const [score, setScore] = useState(0)
 
+  const [nbQuestions, setNbQuestions] = useState(questions.length)
+
+  const [select, setSelect] = useState('A')
+
   function sendAnswer() {
+    if(select === reponses[index]) {
+      setScore(score + 1)
+    }
+  
     setIndex(index + 1)
+    setNbQuestions(nbQuestions - 1)
+    setSelect('A')
   }
 
   function restart() {
     setIndex(0)
     setScore(0)
+    setNbQuestions(questions.length)
   }
 
   return (
@@ -46,17 +59,19 @@ function App() {
           <div>
             <Quiz 
               question={questions[index].question} 
-              nbQuestions={questions.length} 
-              reponse1={questions[index].reponse1}
-              reponse2={questions[index].reponse2}
-              reponse3={questions[index].reponse3}
+              nbQuestions={nbQuestions} 
+              A={questions[index].A}
+              B={questions[index].B}
+              C={questions[index].C}
+              select={select}
+              setSelect={setSelect}
               index={index} />
             <button onClick={sendAnswer}>send answer</button>
           </div>
           ) : (
           <div className='score'>
             <div>
-              <p>Votre score {score}</p>
+              <p>Votre score {score} / {questions.length}</p>
               <button onClick={restart}>réessayer ?</button>
             </div>
           </div>
